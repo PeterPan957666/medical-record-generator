@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>病历智解官 - 病历结果</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+  <header class="top-white">
+    <div class="top-left">
+      <!-- 删除医院LOGO，只保留三个 -->
+      <img src="{{ url_for('static', filename='img/川北医LOGO.png') }}" alt="川北医LOGO" class="header-logo">
+      <img src="{{ url_for('static', filename='img/比赛_LOGO.png') }}" alt="比赛LOGO" class="header-logo">
+      <img src="{{ url_for('static', filename='img/deepseek_LOGO.png') }}" alt="DeepSeekLOGO" class="header-logo">
+    </div>
+
+    <nav class="top-nav">
+      <span class="nav-item" onclick="location.href='/'">首页</span><span class="sep">|</span>
+      <span class="nav-item">病历库</span><span class="sep">|</span>
+      <span class="nav-item">个人中心</span><span class="sep">|</span>
+      <span class="nav-item">帮助中心</span>
+    </nav>
+  </header>
+
+  <main class="mid-band">
+    <div class="mid-inner record-inner">
+      <div class="mid-top record-top">
+        <img src="{{ url_for('static', filename='img/病历智解官LOGO.png') }}" alt="病历智解官LOGO" class="big-logo">
+      </div>
+      <div class="mid-bottom record-bottom">
+        <div class="record-controls">
+          <button id="btnDoctor" class="switch-btn">医方病历</button>
+          <button id="btnPatient" class="switch-btn">患方病历</button>
+        </div>
+        <div class="white-card output-card">
+          <pre id="outputContent" class="output-pre">{{ doctor_record|safe }}</pre>
+        </div>
+        <div class="bottom-controls">
+          <button id="backBtn" class="btn action-btn">返回首页</button>
+          <button id="editBtn" class="btn action-btn">修改病历</button>
+          <button id="signBtn" class="btn action-btn">医生电子签名</button>
+          <button id="downloadBtn" class="btn action-btn download disabled" disabled>保存并下载病历</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bottom-white">
+    <div class="footer-text">© 川北医学院附属医院 | 病历智解官系统 | 技术支持 DeepSeek</div>
+  </footer>
+
+  <script>
+    const DOCTOR_RECORD = `{{ doctor_record | replace("\r","") | replace("`","\\`") }}`;
+    const PATIENT_RECORD = `{{ patient_record | replace("\r","") | replace("`","\\`") }}`;
+  </script>
+  <script src="{{ url_for('static', filename='js/record.js') }}"></script>
+</body>
+</html>
